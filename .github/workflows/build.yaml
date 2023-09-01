@@ -17,21 +17,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        os: ["fedora", "c9s", "c9s-rt"]
-    container:
-      # Yes, we're using this as a *builder* image.
-      image: quay.io/fedora/fedora-coreos:stable
-      options: "--user root --privileged -v /var/tmp:/var/tmp -v /tmp:/tmp"
     steps:
       - uses: actions/checkout@v3
-        # https://github.com/actions/checkout/issues/760
-      - name: Mark git checkout as safe
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Install deps
-        run: rpm-ostree install distribution-gpg-keys
       - name: Login
         run: docker login ghcr.io --username lukewarmtemp --password ${{ secrets.GH_PAT }}
       - name: Build container image
