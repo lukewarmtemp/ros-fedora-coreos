@@ -81,7 +81,7 @@ WORKDIR /etc/ros2/src/ros2/
 RUN git clone -b humble https://github.com/ros2/rviz.git
 
 WORKDIR /etc/ros2
-RUN test -f /etc/bin/ld || ln -s /etc/bin/ld.bfd /etc/bin/ld
+RUN test -f /usr/bin/ld || ln -s /usr/bin/ld.bfd /usr/bin/ld
 
 RUN colcon build --symlink-install --cmake-args -DTHIRDPARTY_Asio=ON --no-warn-unused-cli
 
