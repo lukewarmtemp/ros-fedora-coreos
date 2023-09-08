@@ -53,9 +53,9 @@ RUN python3 -m pip install -U --user \
   flake8-quotes \
   mypy==0.931
 
-WORKDIR /usr
-RUN mkdir -p /usr/ros2/src
-WORKDIR /usr/ros2
+WORKDIR /etc
+RUN mkdir -p /etc/ros2/src
+WORKDIR /etc/ros2
 RUN vcs import --input https://raw.githubusercontent.com/ros2/ros2/${ROS_VERSION}/ros2.repos src
 
 RUN sudo dnf update -y
@@ -69,19 +69,19 @@ RUN touch ./src/ros-visualization/rqt/rqt_gui_cpp/CATKIN_IGNORE && \
 touch ./src/ros-visualization/qt_gui_core/qt_gui_app/CATKIN_IGNORE && \
 touch ./src/ros-visualization/qt_gui_core/qt_gui_cpp/CATKIN_IGNORE
 
-WORKDIR /usr/ros2
-RUN sed -i '1s/^/#include <stdint.h> /' /usr/ros2/src/ros2/rcpputils/include/rcpputils/filesystem_helper.hpp
-RUN sed -i '1s/^/#include <stdint.h> /' /usr/ros2/src/ros-tooling/libstatistics_collector/include/libstatistics_collector/moving_average_statistics/types.hpp
-RUN sed -i '1s/^/#include <stdexcept> /' /usr/ros2/src/ros2/rclcpp/rclcpp/include/rclcpp/context.hpp
-RUN sed -i '1s/^/#include <stdexcept> /' /usr/ros2/src/ros2/rclcpp/rclcpp/src/rclcpp/logging_mutex.cpp
-RUN sed -i '1s/^/#include <stdint.h> /' /usr/ros2/src/ros2/rosbag2/rosbag2_compression/include/rosbag2_compression/compression_options.hpp
+WORKDIR /etc/ros2
+RUN sed -i '1s/^/#include <stdint.h> /' /etc/ros2/src/ros2/rcpputils/include/rcpputils/filesystem_helper.hpp
+RUN sed -i '1s/^/#include <stdint.h> /' /etc/ros2/src/ros-tooling/libstatistics_collector/include/libstatistics_collector/moving_average_statistics/types.hpp
+RUN sed -i '1s/^/#include <stdexcept> /' /etc/ros2/src/ros2/rclcpp/rclcpp/include/rclcpp/context.hpp
+RUN sed -i '1s/^/#include <stdexcept> /' /etc/ros2/src/ros2/rclcpp/rclcpp/src/rclcpp/logging_mutex.cpp
+RUN sed -i '1s/^/#include <stdint.h> /' /etc/ros2/src/ros2/rosbag2/rosbag2_compression/include/rosbag2_compression/compression_options.hpp
 
-RUN rm -R /usr/ros2/src/ros2/rviz/
-WORKDIR /usr/ros2/src/ros2/
+RUN rm -R /etc/ros2/src/ros2/rviz/
+WORKDIR /etc/ros2/src/ros2/
 RUN git clone -b humble https://github.com/ros2/rviz.git
 
-WORKDIR /usr/ros2
-RUN test -f /usr/bin/ld || ln -s /usr/bin/ld.bfd /usr/bin/ld
+WORKDIR /etc/ros2
+RUN test -f /etc/bin/ld || ln -s /etc/bin/ld.bfd /etc/bin/ld
 
 RUN colcon build --symlink-install --cmake-args -DTHIRDPARTY_Asio=ON --no-warn-unused-cli
 
