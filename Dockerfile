@@ -53,12 +53,12 @@ RUN python3 -m pip install -U --user \
   flake8-quotes \
   mypy==0.931
 
-WORKDIR /etc
+# WORKDIR /etc
 RUN mkdir -p /etc/ros2/src
 WORKDIR /etc/ros2
 RUN vcs import --input https://raw.githubusercontent.com/ros2/ros2/${ROS_VERSION}/ros2.repos src
 
-RUN sudo dnf update -y
+# RUN sudo dnf update -y
 
 RUN sudo rosdep init
 RUN rosdep update
@@ -90,14 +90,64 @@ RUN rm -rf /var/lib/unbound
 RUN rm -rf /var/lib/dnf
 RUN rm -rf /var/lib/texmf
 RUN rm -rf /var/log
-RUN rm -rf /var/lib/selinux
-RUN rm -rf /var/lib/sss
-RUN rm -rf /var/lib/alternatives
-RUN rm -rf /var/lib/rpm
-RUN rm -rf /var/lib/systemd
-RUN rm -rf /var/lib/vagrant
-RUN rm -rf /var/lock
-RUN rm -rf /var/mail
-RUN rm -rf /var/run
-
 RUN ostree container commit
+
+# RUN rm -rf /var/roothome/.cache/pip/http
+# RUN rm -rf /var/roothome/.cache/pip/selfcheck
+# RUN rm -rf /var/roothome/.local/bin/dmypy
+# RUN rm -rf /var/roothome/.local/bin/mypy
+# RUN rm -rf /var/roothome/.local/bin/mypyc
+# RUN rm -rf /var/roothome/.local/bin/stubgen
+# RUN rm -rf /var/roothome/.local/bin/stubtest
+# RUN rm -rf /var/roothome/.local/lib/python3.11/site-packages
+# RUN rm -rf /var/roothome/.cmake/packages/cpptoml
+# RUN rm -rf /var/roothome/.ros/rosdep/
+# RUN rm -rf /var/lib/unbound/root.key
+# RUN rm -rf /var/lib/dnf/history.sqlite
+# RUN rm -rf /var/lib/dnf/history.sqlite-shm
+# RUN rm -rf /var/lib/dnf/history.sqlite-wal
+# RUN rm -rf /var/lib/dnf/repos
+# RUN rm -rf /var/lib/texmf/fonts/map
+# RUN rm -rf /var/lib/texmf
+# RUN rm -rf /var/lib/sss/db/config.ldb
+# RUN rm -rf /var/lib/alternatives
+# RUN rm -rf /var/lib/rpm
+# RUN rm -rf /var/lib/selinux/targeted
+# RUN rm -rf /var/lib/systemd/catalog/database
+# RUN rm -rf /var/lib/systemd/random-seed
+# RUN rm -rf /var/lib/vagrant
+# RUN rm -rf /var/log
+# RUN rm -rf /var/lock
+# RUN rm -rf /var/mail
+# RUN rm -rf /var/run
+# RUN rm -rf /
+# RUN rm -rf /
+# RUN rm -rf /var/lib/unbound
+# RUN rm -rf /var/lib/dnf
+# RUN rm -rf /var/lib/texmf
+# RUN rm -rf /var/log
+# RUN rm -rf /var/lib/selinux
+# RUN rm -rf /var/lib/sss
+# RUN rm -rf /var/lib/alternatives
+# RUN rm -rf /var/lib/rpm
+# RUN rm -rf /var/lib/systemd
+# RUN rm -rf /var/lib/vagrant
+
+
+# RUN rm -rf /var/roothome
+# RUN rm -rf /var/lib/unbound
+# RUN rm -rf /var/lib/dnf
+# RUN rm -rf /var/lib/texmf
+# RUN rm -rf /var/log
+# RUN rm -rf /var/lib/sss
+# RUN rm -rf /var/lib/alternatives
+# RUN rm -rf /var/lib/rpm
+# RUN rm -rf /var/lib/selinux
+# RUN rm -rf /var/lib/systemd/catalog/database
+# RUN rm -rf /var/lib/systemd/random-seed
+# RUN rm -rf /var/lib/vagrant
+# RUN rm -rf /var/lock
+# RUN rm -rf /var/mail
+# RUN rm -rf /var/run
+# RUN chmod +x /etc/ros2/install/*
+
